@@ -1,0 +1,47 @@
+<h1 class="page-header">Eleições</h1>
+
+<% if @eleicao.errors.any? %>
+<div class="alert alert-danger alert-dismissable">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+    <ul>
+        <% @eleicao.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+        <% end %>
+    </ul>
+</div>
+<% end %>
+
+<div class="panel panel-default">
+<div class="panel-heading">
+    <%= action %>
+</div>
+<!-- /.panel-heading -->
+<div class="panel-body">
+    <div class="col-lg-6">
+        <%= form_for(@eleicao) do |f| %>
+            <div class="form-group">
+                <label>Descrição</label>
+                <%= f.text_field :descricao, autofocus: true, class: "form-control", placeholder: "Descrição da Eleição"  %>
+            </div>
+            <div class="form-group">
+                <label>Numero de Urnas</label>
+                <%= f.text_field :numerournas, class: "form-control", placeholder: "Numero de Urnas da Eleição"  %>
+            </div>
+            <div class="form-group">
+                <label>Numero de Eleitores</label>
+                <%= f.text_field :numeroeleitores, class: "form-control", placeholder: "Numero de Eleitores da Eleição"  %>
+            </div>
+            <div class="form-group">
+                <label>Numero de Candidatos</label>
+                <%= f.text_field :numerocandidatos, class: "form-control", placeholder: "Numero de Candidatos da Eleição"  %>
+            </div>
+            <button type="submit" class="btn btn-default">Salvar</button>
+            <%= link_to eleicoes_path, class: "btn btn-default" do %>
+                Voltar
+            <% end %>
+        <% end %>
+    </div>
+    
+</div>
+    <!-- /.panel-body -->
+</div>

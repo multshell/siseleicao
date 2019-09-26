@@ -1,0 +1,39 @@
+<h1 class="page-header">Votacão</h1>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Listando Votação
+        </div>
+        <!-- /.panel-heading -->
+        <div class="panel-body">
+            <div>
+                <table id="votacoes" class="table table-striped table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Eleição</th>
+                            <th>Urna</th>
+                            <th>Candidato Numero</th>
+                            <th>Candidato Nome</th>
+                            <th>Votos</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% @votacoes.each do |votacao| %>
+                        <tr>
+                            <td><%= votacao.id %></td>
+                            <td><%= votacao.eleicao.descricao %></td>
+                            <td><%= votacao.urna.numero %></td>
+                            <td><%= votacao.candidato.numero %></td>
+                            <td><%= votacao.candidato.nome_campanha %></td>
+                            <td><%= votacao.votos %></td>
+                        </tr>
+                        <% end %>
+                    </tbody>
+                </table>
+                
+            </div>
+            <!-- /.table-responsive -->
+        </div>
+            <!-- /.panel-body -->
+    </div>    

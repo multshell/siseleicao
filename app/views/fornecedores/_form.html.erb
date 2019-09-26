@@ -1,0 +1,61 @@
+<h1 class="page-header">Fornecedores</h1>
+
+<% if @fornecedor.errors.any? %>
+<div class="alert alert-danger alert-dismissable">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+    <ul>
+        <% @fornecedor.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+        <% end %>
+    </ul>
+</div>
+<% end %>
+
+<div class="panel panel-default">
+<div class="panel-heading">
+    <%= action %>
+</div>
+<!-- /.panel-heading -->
+<div class="panel-body">
+    <div class="col-lg-6">
+        <%= form_for(@fornecedor) do |f| %>
+            <div class="form-group">
+                <label>Razão Social</label>
+                <%= f.text_field :nome, autofocus: true, class: "form-control", placeholder: "Razão Social do Fornecedor"  %>
+            </div>
+            <div class="form-group">
+                <label>Contato</label>
+                <%= f.text_field :contato, class: "form-control", placeholder: "Contato do Fornecedor"  %>
+            </div>
+            <div class="form-group">
+                <label>Telefone</label>
+                <%= f.text_field :telefone, class: "form-control", id: 'tel_celular', placeholder: "Telefone do Fornecedor"  %>
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <%= f.text_field :email, class: "form-control", placeholder: "Email do Fornecedor"  %>
+            </div>
+            <button type="submit" class="btn btn-default">Salvar</button>
+            <%= link_to fornecedores_path, class: "btn btn-default" do %>
+                Voltar
+            <% end %>
+        <% end %>
+    </div>
+    
+</div>
+    <!-- /.panel-body -->
+</div>
+
+<script type="text/javascript" charset="utf-8"> 
+    $('#tel_celular').mask("(99) 99999-9999").focusout(function() {
+      var phone, element;
+      element = $(this);
+      element.unmask();
+      phone = element.val().replace(/\D/g, '');
+      if (phone.length > 10) {
+           element.mask("(99) 99999-9999");
+      } else {
+           element.mask("(99) 9999-9999");
+      }
+ }).trigger('focusout');
+</script>

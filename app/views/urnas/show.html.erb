@@ -1,0 +1,71 @@
+<h1 class="page-header">Urna</h1>
+
+<div class="panel panel-default">
+<!-- /.panel-heading -->
+    <div class="panel-body">
+        <div class="col-lg-12">
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <h3><label>Numero:</label>
+                    <%= @urna.numero %></h3>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label>Local de Votação:</label>
+                    <p class="form-control-static">
+                        <%= @urna.escola %>
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label>Nome da Localidade:</label>
+                    <p class="form-control-static">
+                        <%= @urna.localidade %>
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label>Seções:</label>
+                    <p class="form-control-static">
+                        <%= @urna.secoes %>
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label>Numero de Eleitores:</label>
+                    <p class="form-control-static">
+                        <%= number_with_delimiter(@urna.eleitores, delimiter: ".") %>
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label>Eleição:</label>
+                    <p class="form-control-static">
+                        <%= @urna.eleicao.descricao %>
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <% if policy(@urna).edit? %>
+                    <%= link_to edit_urna_path(@urna), class: "btn btn-primary" do %>
+                        Editar
+                    <% end %>
+                <% else %>
+                    <%= link_to '#', disabled: 'disabled', class: "btn btn-primary" do %>
+                        Editar
+                    <% end %>
+                <% end %>
+                <%= link_to urnas_path, class: "btn btn-default" do %>
+                    Voltar
+                <% end %>
+            </div>
+        </div>
+        
+    </div>
+    <!-- /.panel-body -->
+</div>

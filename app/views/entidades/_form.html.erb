@@ -1,0 +1,39 @@
+<h1 class="page-header">Órgãos</h1>
+
+<% if @entidade.errors.any? %>
+<div class="alert alert-danger alert-dismissable">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+    <ul>
+        <% @entidade.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+        <% end %>
+    </ul>
+</div>
+<% end %>
+
+<div class="panel panel-default">
+<div class="panel-heading">
+    <%= action %>
+</div>
+<!-- /.panel-heading -->
+<div class="panel-body">
+    <div class="col-lg-6">
+        <%= form_for(@entidade) do |f| %>
+            <div class="form-group">
+                <label>Sigla</label>
+                <%= f.text_field :sigla, autofocus: true, class: "form-control", placeholder: "Sigla do Órgão"  %>
+            </div>
+            <div class="form-group">
+                <label>Nome</label>
+                <%= f.text_field :nome, class: "form-control", placeholder: "Nome do Órgão"  %>
+            </div>
+            <button type="submit" class="btn btn-default">Salvar</button>
+            <%= link_to entidades_path, class: "btn btn-default" do %>
+                Voltar
+            <% end %>
+        <% end %>
+    </div>
+    
+</div>
+    <!-- /.panel-body -->
+</div>

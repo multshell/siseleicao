@@ -1,0 +1,55 @@
+<h1 class="page-header">Candidato</h1>
+
+<div class="panel panel-default">
+<!-- /.panel-heading -->
+    <div class="panel-body">
+        <div class="col-lg-12">
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <h3><label>Numero do Candidato:</label>
+                    <%= @candidato.numero %></h3>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label>Nome de Campanha:</label>
+                    <p class="form-control-static">
+                        <%= @candidato.nome_campanha %>
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label>Nome Completo:</label>
+                    <p class="form-control-static">
+                        <%= @candidato.nome_completo %>
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label>Eleição:</label>
+                    <p class="form-control-static">
+                        <%= @candidato.eleicao.descricao %>
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <% if policy(@candidato).edit? %>
+                    <%= link_to edit_candidato_path(@candidato), class: "btn btn-primary" do %>
+                        Editar
+                    <% end %>
+                <% else %>
+                    <%= link_to '#', disabled: 'disabled', class: "btn btn-primary" do %>
+                        Editar
+                    <% end %>
+                <% end %>
+                <%= link_to candidatos_path, class: "btn btn-default" do %>
+                    Voltar
+                <% end %>
+            </div>
+        </div>
+        
+    </div>
+    <!-- /.panel-body -->
+</div>

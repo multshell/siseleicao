@@ -1,0 +1,6 @@
+'pt-BR':
+  enums:
+    user:
+      role:
+        completo: Completo
+        restrito: Restrito

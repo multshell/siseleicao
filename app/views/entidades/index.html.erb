@@ -1,0 +1,68 @@
+<h1 class="page-header">Órgãos</h1>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Listando Órgãos
+            <% if policy(@entidades).new? %>
+                <%= link_to new_entidade_path, class: "btn btn-success btn-sm pull-right", style: "margin-top: -5px" do %>
+                    <i class="fa fa-plus"></i>
+                <% end %>
+            <% else %>
+                <%= link_to '#', disabled: 'disabled', class:"btn btn-success btn-sm pull-right", style:"margin-top: -5px" do %>
+                    <i class="fa fa-plus"></i>
+                <% end %>
+            <% end %>
+        </div>
+        <!-- /.panel-heading -->
+        <div class="panel-body">
+            <div>
+                <table id="entidades"  class="table table-striped table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Sigla</th>
+                            <th>Nome</th>
+                            <th></th>
+                    </thead>
+                    <tbody>
+                        <% @entidades.each do |entidade| %>
+                        <tr>
+                            <td><%= entidade.id %></td>
+                            <td><%= entidade.sigla %></td>
+                            <td><%= entidade.nome %></td>
+                            <td width="50">
+                                <div class="pull-right">
+                                    <% if policy(@entidades).edit? %>
+                                        <%= link_to edit_entidade_path(entidade), class: "btn btn-primary btn-xs" do %>
+                                            <i class="fa fa-edit"></i>
+                                        <% end %>
+                                    <% else %>
+                                        <%= link_to '#', disabled: 'disabled', class:"btn btn-primary btn-xs" do %>
+                                            <i class="fa fa-edit"></i>
+                                        <% end %>
+                                    <% end %>
+                                    <% if policy(@entidades).destroy? and entidade.contratos.length == 0 %>
+                                        <%= link_to entidade_path(entidade),
+                                                method: :delete,
+                                                class: "btn btn-danger btn-xs",
+                                                data: {confirm: "Você deseja realmente excluir (<b>#{entidade.sigla}</b>)?"} do %>
+                                            <i class="fa fa-minus"></i>
+                                        <% end %>
+                                    <% else %>
+                                        <%= link_to '#', disabled: "", class:"btn btn-danger btn-xs" do %>
+                                            <i class="fa fa-minus"></i>
+                                        <% end %>
+                                    <% end %>
+                                </div>
+                            </td>
+                        </tr>
+                        <% end %>
+                    </tbody>
+                </table>
+                
+            </div>
+            <!-- /.table-responsive -->
+        </div>
+            <!-- /.panel-body -->
+        </div>
+

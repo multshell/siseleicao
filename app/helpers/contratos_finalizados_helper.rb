@@ -1,0 +1,2 @@
+module ContratosFinalizadosHelper
+end

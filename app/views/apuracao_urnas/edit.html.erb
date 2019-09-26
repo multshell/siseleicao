@@ -1,0 +1,35 @@
+<h1 class="page-header">Votação da Urna</h1>
+
+<% if @urna.errors.any? %>
+<div class="alert alert-danger alert-dismissable">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+    <ul>
+        <% @urna.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+        <% end %>
+    </ul>
+</div>
+<% end %>
+
+<div class="panel panel-default">
+<div class="panel-heading">
+ 
+</div>
+<!-- /.panel-heading -->
+<div class="panel-body">
+    <div class="col-lg-6">
+        <%= form_for(@urna, url: {controller: "apuracao_urnas", action: "update"}) do |f| %>
+            <div class="form-group">
+                <label>Total de Votos da Urna</label>
+                <%= f.text_field :total_votacao, class: "form-control", placeholder: "Total de Votos Apurados na Urna"  %>
+            </div>
+            <button type="submit" class="btn btn-default">Salvar</button>
+            <%= link_to apuracao_urna_path(@urna.id), class: "btn btn-default" do %>
+                Voltar
+            <% end %>
+        <% end %>
+    </div>
+    
+</div>
+    <!-- /.panel-body -->
+</div>

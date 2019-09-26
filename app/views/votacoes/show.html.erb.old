@@ -1,0 +1,55 @@
+<h1 class="page-header">Votação</h1>
+
+<div class="panel panel-default">
+<!-- /.panel-heading -->
+    <div class="panel-body">
+        <div class="col-lg-12">
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <h3><label>Eleição:</label>
+                    <%= @votacao.eleicao.descricao %></h3>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label>Urna:</label>
+                    <p class="form-control-static">
+                        <%= @votacao.urna.numero %>
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label>Candidato:</label>
+                    <p class="form-control-static">
+                        <%= @votacao.candidato.nome_campanha %>
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label>Votos:</label>
+                    <p class="form-control-static">
+                        <%= @votacao.votos %>
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <% if policy(@votacao).edit? %>
+                    <%= link_to edit_votacao_path(@votacao), class: "btn btn-primary" do %>
+                        Editar
+                    <% end %>
+                <% else %>
+                    <%= link_to '#', disabled: 'disabled', class: "btn btn-primary" do %>
+                        Editar
+                    <% end %>
+                <% end %>
+                <%= link_to votacoes_path, class: "btn btn-default" do %>
+                    Voltar
+                <% end %>
+            </div>
+        </div>
+        
+    </div>
+    <!-- /.panel-body -->
+</div>

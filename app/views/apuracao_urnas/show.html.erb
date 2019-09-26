@@ -1,0 +1,203 @@
+<h1 class="page-header">Apuração da Urna</h1>
+
+<div class="panel panel-default">
+<!-- /.panel-heading -->
+    <div class="panel-body">
+        <div class="col-lg-12">
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <h3><label>Numero:</label>
+                    <%= @urna.numero %></h3>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="form-group">
+                    <h3><label>Situação:</label>
+                    <% if @urna.finalizada %>
+                        <div class="alert-danger">Urna com Apuração Finalizada</div>
+                    <% else %>
+                        Apurando
+                    <% end %></h3>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label>Eleição:</label>
+                    <p class="form-control-static">
+                        <%= @urna.eleicao.descricao %>
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label>Local de Votação:</label>
+                    <p class="form-control-static">
+                        <%= @urna.escola %>
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label>Nome da Localidade:</label>
+                    <p class="form-control-static">
+                        <%= @urna.localidade %>
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+            <div class="col-lg-3">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="row">
+                    
+                            <div class="col-xs-12 text-center">
+                                <div class="huge"><%= @urna.eleicao.candidatos.size - @apurados %></div>
+                                <div>Candidatos à Apurar + Brancos e Nulos</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="row">
+                    
+                            <div class="col-xs-12 text-center">
+                                <div class="huge"><%= @apurados %></div>
+                                <div>Candidatos apurados</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="row">
+                    
+                            <div class="col-xs-12 text-center">
+                                <div class="huge"><%= number_with_delimiter(@urna.total_votacao, delimiter: ".") %></div>
+                                <div>Votos da Urna</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="row">
+                    
+                            <div class="col-xs-12 text-center">
+                                <div class="huge"><%= number_with_delimiter(@votosapurados, delimiter: ".") %></div>
+                                <div>Votos Apurados</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+            <div class="col-lg-12">
+                <% if @urna.finalizada %>
+                <% else %>
+                    <% if policy(@urna).edit? %>
+                        <%= link_to edit_apuracao_urna_path(@urna), class: "btn btn-success" do %>
+                            Registrar Total de Votos da Urna
+                        <% end %>
+                    <% else %>
+                        <%= link_to '#', disabled: 'disabled', class: "btn btn-primary" do %>
+                            Registrar Total de Votos da Urna
+                        <% end %>
+                    <% end %>
+                    
+                    <%= link_to apuracao_urnas_path, class: "btn btn-default" do %>
+                        Voltar
+                    <% end %>
+                    
+                    <% if @urna.eleicao.candidatos.size == @apurados and @urna.total_votacao == @votosapurados %>
+                        <%= link_to finaliza_path(@urna.id), class: "btn btn-success" do %>
+                            Finalizar Apuração da Urna
+                        <% end %>
+                    <% else %>
+                        <%= link_to '#', disabled: 'disabled', class: "btn btn-primary" do %>
+                            Finalizar Apuração da Urna
+                        <% end %>
+                    <% end %>
+                <% end %>
+            </div>
+            <div class="col-lg-12">
+                </br>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Votação
+                        <% if @urna.finalizada == false %>
+                            <% if policy(@urna).new? %>
+                                <%= link_to votacao_path(@urna.id), class: "btn btn-success btn-sm pull-right", style: "margin-top: -5px" do %>
+                                    <i class="fa fa-plus"></i>
+                                <% end %>
+                            <% else %>
+                                <%= link_to '#', disabled: 'disabled', class:"btn btn-success btn-sm pull-right", style:"margin-top: -5px" do %>
+                                    <i class="fa fa-plus"></i>
+                                <% end %>
+                            <% end %>
+                        <% end %>
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table id="apuracao" class="table table-striped table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Candidato Nome</th>
+                                        <th>Candidato Numero</th>
+                                        <th>Votos</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% @votacoes.each do |votacao| %>
+                                        <tr>
+                                            <td><%= votacao.candidato.nome_campanha %></td>
+                                            <td><%= votacao.candidato.numero %></td>
+                                            <td><%= votacao.votos %></td>
+                                            <td style="width: 100px">
+                                                <% if @urna.finalizada == false %>
+                                                    <% if policy(votacao).edit? %>
+                                                        <%= link_to edit_votacao_path(votacao), class: "btn btn-primary btn-xs" do %>
+                                                            <i class="fa fa-edit"></i>
+                                                        <% end %>
+                                                    <% else %>
+                                                        <%= link_to '#', disabled: 'disabled', class:"btn btn-primary btn-xs", style:"margin-top: -5px" do %>
+                                                            <i class="fa fa-edit"></i>
+                                                        <% end %>
+                                                    <% end %>
+                                                    <% if policy(votacao).destroy? %>
+                                                        <%= link_to votacao_path(votacao),
+                                                                method: :delete,
+                                                                class: "btn btn-danger btn-xs",
+                                                                data: {confirm: "Você deseja realmente excluir (<b>#{votacao.candidato.nome_campanha}</b>)?"} do %>
+                                                            <i class="fa fa-minus"></i>
+                                                        <% end %>
+                                                    <% else %>
+                                                        <%= link_to '#', disabled: 'disabled', class:"btn btn-danger btn-xs", style:"margin-top: -5px" do %>
+                                                            <i class="fa fa-minus"></i>
+                                                        <% end %>
+                                                    <% end %>
+                                                <% end %>
+                                            </td>
+                                        </tr>
+                                    <% end %>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.table-responsive -->
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <!-- /.panel-body -->
+</div>

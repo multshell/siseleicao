@@ -1,0 +1,168 @@
+<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <img class="pull-right" src="/imagens/logo-1.png" style="margin: 10px" alt="Logo">
+            </div>
+            <!-- /.navbar-header -->
+
+            <ul class="nav navbar-top-links navbar-center">
+                <h2 class="navbar-brand">Resultado da Eleição para o Conselho Tutelar 2019</h2>
+            </ul>
+            <!-- /.navbar-top-links -->
+        </nav>
+<br>
+<div class="col-lg-2">
+    
+</div>
+
+<div class="col-lg-6">
+    <div class="panel panel-green">
+        <div class="panel-heading">
+            <strong>Resultado da Votação</strong>
+            <%= @resultados %>
+        </div>
+        <!-- /.panel-heading -->
+        <div class="panel-body">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th><h4>Numero</h4></th>
+                            <th><h4>Candidato</h4></th>
+                            <th><h4>Votos</h4></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% @votacoes.each do |votacao| %>
+                            <% unless votacao['candidato_numero'] == "98" or votacao['candidato_numero'] == "99" %>
+                            <tr>
+                                <td><h4><%= votacao['candidato_numero'] %></h4></td>
+                                <td><h4><%= votacao['candidato_nome'] %></h4></td>
+                                <td><h4><%= votacao['candidato_votos'] %></h4></td>
+                            </tr>
+                            <% end %>
+                        <% end %>
+                    </tbody>
+                    <%#= @votacoes.sum(:votos) %>
+                </table>
+            </div>
+            <!-- /.table-responsive -->
+        </div>
+        <!-- /.panel-body -->
+    </div>
+    <!-- /.panel -->
+</div>
+
+<div class="col-lg-2">
+    <div class="panel panel-green">
+        <div class="panel-heading">
+            <strong>Urnas</strong>
+            <div class="pull-right">
+                <strong><%= number_with_delimiter(@totalurnas, delimiter: ".") %></strong>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="list-group">
+                <div class="list-group-item">
+                    <strong>Apuradas</strong>
+                    <span class="pull-right">
+                        <%= number_with_delimiter(@totalurnasapuradas, delimiter: ".") %> (<%= number_to_percentage(@perurnasapuradas, precision: 2) %>)
+                    </span>
+                </div>
+                <div class="list-group-item">
+                    <strong>Não Apuradas</strong>
+                    <span class="pull-right">
+                        <%= number_with_delimiter(@urnasnaoapuradas, delimiter: ".") %> (<%= number_to_percentage(@perurnasnaoapuradas, precision: 2) %>)
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-green">
+        <div class="panel-heading">
+            <strong>Eleitorado</strong>
+            <div class="pull-right">
+                <strong>
+                    <%= number_with_delimiter(@totaleleitores, delimiter: ".") %>
+                </strong>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="list-group">
+                <div class="list-group-item">
+                    <strong>Não Apurado</strong>
+                    <span class="pull-right">
+                        <% if @totalurnas == @totalurnasapuradas %>
+                            0 (0,00%)
+                        <% else %>
+                            <%= number_with_delimiter(@naoapurados, delimiter: ".") %>
+                            (<%= number_to_percentage(@pereleitoresnaoapurados, precision: 2) %>)
+                        <% end %>
+                    </span>
+                </div>
+                <div class="list-group-item">
+                    <strong>Apurado</strong>
+                    <span class="pull-right">
+                        <% if @totalurnas == @totalurnasapuradas %>
+                            <%= number_with_delimiter(@totaleleitores, delimiter: ".") %> (100,00%)
+                        <% else %>
+                            <%= number_with_delimiter(@apurados, delimiter: ".") %>
+                            (<%= number_to_percentage(@pereleitoresapurados, precision: 2) %>)
+                        <% end %>
+                    </span>
+                </div>
+                <% if @totalurnas == @totalurnasapuradas %>
+                <div class="list-group-item">
+                    <strong>Abstenções</strong>
+                    <span class="pull-right">
+                        <%= number_with_delimiter(@abstencoes, delimiter: ".") %>
+                        (<%= number_to_percentage(@perabstencoes, precision: 2) %>)
+                    </span>
+                </div>
+                <div class="list-group-item">
+                    <strong>Comparecimento</strong>
+                    <span class="pull-right">
+                        <%= number_with_delimiter(@apurados, delimiter: ".") %>
+                        (<%= number_to_percentage(@pereleitoresapurados, precision: 2) %>)
+                    </span>
+                </div>
+                <% end %>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-green">
+        <div class="panel-heading">
+            <strong>Votos</strong>
+            <div class="pull-right">
+                <strong>
+                    <%= number_with_delimiter(@apurados, delimiter: ".") %>
+                </strong>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="list-group">
+                <div class="list-group-item">
+                    <strong>Válidos</strong>
+                    <span class="pull-right">
+                        <%= number_with_delimiter(@validos, delimiter: ".") %>
+                        (<%= number_to_percentage(@pervalidos, precision: 2) %>)
+                    </span>
+                </div>
+                <div class="list-group-item">
+                    <strong>Brancos</strong>
+                    <span class="pull-right">
+                        <%= number_with_delimiter(@votosbrancos, delimiter: ".") %>
+                        (<%= number_to_percentage(@perbrancos, precision: 2) %>)
+                    </span>
+                </div>
+                <div class="list-group-item">
+                    <strong>Nulos</strong>
+                    <span class="pull-right">
+                        <%= number_with_delimiter(@votosnulos, delimiter: ".") %>
+                        (<%= number_to_percentage(@pernulos, precision: 2) %>)
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.col-lg-4 -->
+</div>

@@ -1,0 +1,35 @@
+<h1 class="page-header">Tipo de Aditivo</h1>
+
+<% if @tipo_aditivo.errors.any? %>
+<div class="alert alert-danger alert-dismissable">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+    <ul>
+        <% @tipo_aditivo.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+        <% end %>
+    </ul>
+</div>
+<% end %>
+
+<div class="panel panel-default">
+<div class="panel-heading">
+    <%= action %>
+</div>
+<!-- /.panel-heading -->
+<div class="panel-body">
+    <div class="col-lg-6">
+        <%= form_for(@tipo_aditivo) do |f| %>
+            <div class="form-group">
+                <label>Descrição</label>
+                <%= f.text_field :descricao, autofocus: true, class: "form-control", placeholder: "Descrição do Tipo de Aditivo"  %>
+            </div>
+            <button type="submit" class="btn btn-default">Salvar</button>
+            <%= link_to tipo_aditivos_path, class: "btn btn-default" do %>
+                Voltar
+            <% end %>
+        <% end %>
+    </div>
+    
+</div>
+    <!-- /.panel-body -->
+</div>
