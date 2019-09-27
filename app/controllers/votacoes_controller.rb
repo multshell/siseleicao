@@ -1,5 +1,5 @@
 class VotacoesController < SistemaController
-  before_action :set_votacao, only: [:edit, :update, :destroy, :show]
+  before_action :set_votacao, only: [:edit, :update, :destroy]
   before_action :set_options_for_select, only: [:new, :edit, :show, :create, :update, :destroy]
     
   # GET /fornecedores

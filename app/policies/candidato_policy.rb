@@ -1,11 +1,11 @@
 class CandidatoPolicy < ApplicationPolicy
   
   def new?
-    user.completo?
+    true
   end
   
   def edit?
-    user.completo?
+    true
   end
   
   def destroy?

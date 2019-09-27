@@ -132,7 +132,7 @@
                     <div class="panel-heading">
                         Votação
                         <% if @urna.finalizada == false %>
-                            <% if policy(@urna).new? %>
+                            <% if policy(@votacoes).new? %>
                                 <%= link_to votacao_path(@urna.id), class: "btn btn-success btn-sm pull-right", style: "margin-top: -5px" do %>
                                     <i class="fa fa-plus"></i>
                                 <% end %>

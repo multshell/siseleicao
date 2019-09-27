@@ -1,15 +1,15 @@
 class VotacaoPolicy < ApplicationPolicy
   
   def show?
-    user.completo?
+    true
   end
   
   def new?
-    user.completo?
+    true
   end
   
   def edit?
-    user.completo?
+    true
   end
   
   def destroy?
