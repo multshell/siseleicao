@@ -5,6 +5,10 @@ class UsersController < SistemaController
     @users = User.where("id != '1'")
   end
   
+  def logsis
+    @logssis = Log.all.order("data_hora ASC")
+  end
+  
   def new
     @user = User.new
     authorize @user

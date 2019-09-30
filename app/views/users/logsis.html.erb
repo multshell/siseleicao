@@ -1,0 +1,32 @@
+<h1 class="page-header">Logs do Sistema</h1>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Listando Logs
+        </div>
+        <!-- /.panel-heading -->
+        <div class="panel-body">
+            <div>
+                <table id="users" class="table table-striped table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>Data e Hora</th>
+                            <th>Operação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% @logssis.each do |logsis| %>
+                        <tr>
+                            <td><%= logsis.id %></td>
+                            <td><%= logsis.data_hora %></td>
+                            <td><%= logsis.descricao %></td>
+                        </tr>
+                        <% end %>
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.table-responsive -->
+        </div>
+            <!-- /.panel-body -->
+        </div>

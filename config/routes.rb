@@ -28,6 +28,8 @@ Rails.application.routes.draw do
   resources :apuracao_urnas
   
   get 'finaliza/:id' => 'urnas#finaliza', as: :finaliza
+  
+  get 'logs/index' => 'users#logsis'
 
   root 'panels#index'
 

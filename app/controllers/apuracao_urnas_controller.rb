@@ -40,7 +40,24 @@ class ApuracaoUrnasController < SistemaController
   # PATCH/PUT /fornecedores/1
   # PATCH/PUT /fornecedores/1.json
   def update
+    
+    @teste = Urna.find(@urna.id)
+    alterados_log = ""
+    
     if @urna.update(urna_params)
+      
+      n1 = false
+      
+      if @teste.total_votacao != @urna.total_votacao
+        n1 = true
+        alterados_log = alterados_log + " total_votacao: " + @urna.total_votacao.to_s
+      end
+      descricao_log = current_user.name + " alterou o total de votos da urna: " + @urna.id.to_s + ", para as seguintes informações: " + alterados_log
+      
+      if n1
+        Log.create!(data_hora: Time.current, descricao: descricao_log)
+      end
+      
       redirect_to apuracao_urna_path(@urna), notice: "A Urna (#{@urna.id} - #{@urna.escola}) foi atualizada com sucesso!"
     else
       render :edit

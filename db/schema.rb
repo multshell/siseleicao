@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190925204342) do
+ActiveRecord::Schema.define(version: 20190927142608) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -88,6 +88,16 @@ ActiveRecord::Schema.define(version: 20190925204342) do
     t.datetime "updated_at",             null: false
   end
 
+  create_table "logs", force: :cascade do |t|
+    t.integer  "eleicao_id"
+    t.datetime "data_hora"
+    t.text     "descricao"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "logs", ["eleicao_id"], name: "index_logs_on_eleicao_id", using: :btree
+
   create_table "modalidades", force: :cascade do |t|
     t.string   "descricao"
     t.datetime "created_at", null: false
@@ -146,6 +156,7 @@ ActiveRecord::Schema.define(version: 20190925204342) do
   add_foreign_key "contratos", "entidades"
   add_foreign_key "contratos", "fornecedores"
   add_foreign_key "contratos", "modalidades"
+  add_foreign_key "logs", "eleicoes"
   add_foreign_key "votacoes", "candidatos"
   add_foreign_key "votacoes", "eleicoes"
   add_foreign_key "votacoes", "urnas"

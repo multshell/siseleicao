@@ -33,6 +33,8 @@ class VotacoesController < SistemaController
     @votacao = Votacao.new(votacao_params)
     
     if @votacao.save
+      descricao_log = current_user.name + " incluiu a Votacao " + @votacao.inspect
+      Log.create!(data_hora: Time.current, descricao: descricao_log)
       redirect_to apuracao_urna_path(@votacao.urna_id), notice: "Os Votos do (#{@votacao.candidato.nome_campanha}) foram registrados com sucesso!"
     else
       render :new
@@ -42,7 +44,30 @@ class VotacoesController < SistemaController
   # PATCH/PUT /fornecedores/1
   # PATCH/PUT /fornecedores/1.json
   def update
+    
+    @teste = Votacao.find(@votacao.id)
+    alterados_log = ""
+    @nome_candidato = @votacao.candidato.nome_campanha
+    
     if @votacao.update(votacao_params)
+      
+      n1 = false
+      n2 = false
+      
+      if @teste.candidato_id != @votacao.candidato_id
+        n1 = true
+        alterados_log = alterados_log + " nome_campanha: " + @votacao.candidato.nome_campanha
+      end
+      if @teste.votos != @votacao.votos
+        n2 = true
+        alterados_log = alterados_log + " votos: " + @votacao.votos.to_s
+      end
+      descricao_log = current_user.name + " alterou a votacao: " + @votacao.id.to_s + ", Candidato: " + @nome_candidato + ", para as seguintes informações: " + alterados_log
+      
+      if n1 or n2
+        Log.create!(data_hora: Time.current, descricao: descricao_log)
+      end
+      
       redirect_to apuracao_urna_path(@votacao.urna_id), notice: "Os Votos do (#{@votacao.candidato.nome_campanha}) foram atualizados com sucesso!"
     else
       render :edit
@@ -54,8 +79,10 @@ class VotacoesController < SistemaController
   def destroy
     authorize @votacao
     votacao_candidato_nome_campanha = @votacao.candidato.nome_campanha
+    descricao_log = current_user.name + " excluiu a Votacao " + @votacao.inspect
     
     if @votacao.destroy
+      Log.create!(data_hora: Time.current, descricao: descricao_log)
       redirect_to votacoes_path, notice: "Os Votos do (#{votacao_candidato_nome_campanha}) foram excluídos com sucesso!"
     else
       render :index
