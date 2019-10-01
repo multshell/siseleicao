@@ -38,9 +38,10 @@ class PanelsController < ApplicationController
 	     #           group by v.candidato_id"
 	  
 	  #@apurados = ActiveRecord::Base.connection.execute("select (sum(v.votos)) as apurados from votacoes v inner join urnas u on v.urna_id = u.id where u.finalizada = true")
-	  
+	  @candidatos = Candidato.all
 	  #@votacoes = ActiveRecord::Base.connection.execute("select c.numero as candidato_numero, c.nome_campanha as candidato_nome, (sum(v.votos)) as candidato_votos from candidatos c inner join votacoes v on c.id = v.candidato_id group by c.numero, c.nome_campanha order by candidato_votos desc")
     #@votacoes = ActiveRecord::Base.connection.execute("select c.numero as candidato_numero, c.nome_campanha as candidato_nome, (sum(v.votos)) as candidato_votos from candidatos c inner join votacoes v on c.id = v.candidato_id group by c.numero, c.nome_campanha order by c.numero")
     @votacoes = ActiveRecord::Base.connection.execute("select c.numero as candidato_numero, c.nome_campanha as candidato_nome, (sum(v.votos)) as candidato_votos from candidatos c inner join votacoes v on c.id = v.candidato_id inner join urnas u on v.urna_id = u.id where u.finalizada = true group by c.numero, c.nome_campanha order by candidato_votos desc")
+    #@votacoes = ActiveRecord::Base.connection.execute("select c.numero as candidato_numero, c.nome_campanha as candidato_nome, (sum(v.votos)) as candidato_votos from candidatos c inner join votacoes v on c.id = v.candidato_id inner join urnas u on v.urna_id = u.id group by c.numero, c.nome_campanha order by candidato_votos desc")
   end
 end

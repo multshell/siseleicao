@@ -26,6 +26,7 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
+                            <th>Foto</th>
                             <th><h4>Numero</h4></th>
                             <th><h4>Candidato</h4></th>
                             <th><h4>Votos</h4></th>
@@ -35,6 +36,8 @@
                         <% @votacoes.each do |votacao| %>
                             <% unless votacao['candidato_numero'] == "98" or votacao['candidato_numero'] == "99" %>
                             <tr>
+                                <% @fotos = @candidatos.where(numero: votacao['candidato_numero']) %>
+                                <td><%= image_tag @fotos.first.foto.url(:thumb) %></td>
                                 <td><h4><%= votacao['candidato_numero'] %></h4></td>
                                 <td><h4><%= votacao['candidato_nome'] %></h4></td>
                                 <td><h4><%= votacao['candidato_votos'] %></h4></td>

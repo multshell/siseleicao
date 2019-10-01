@@ -105,6 +105,6 @@ class CandidatosController < SistemaController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def candidato_params
-      params.require(:candidato).permit(:numero, :nome_completo, :nome_campanha, :eleicao_id)
+      params.require(:candidato).permit(:numero, :nome_completo, :nome_campanha, :eleicao_id, :foto)
     end
 end

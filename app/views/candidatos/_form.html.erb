@@ -35,6 +35,10 @@
                 <label>Nome Completo</label>
                 <%= f.text_field :nome_completo, class: "form-control", placeholder: "Nome Completo do Candidato"  %>
             </div>
+            <div class="form-group">
+                <label>Foto</label>
+                <%= f.file_field :foto, class: "form-control" %>
+            </div>
             <button type="submit" class="btn btn-default">Salvar</button>
             <%= link_to candidatos_path, class: "btn btn-default" do %>
                 Voltar

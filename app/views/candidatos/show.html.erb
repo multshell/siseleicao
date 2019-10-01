@@ -34,6 +34,14 @@
                     </p>
                 </div>
             </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label>Foto:</label>
+                    <p class="form-control-static">
+                        <%= image_tag @candidato.foto.url(:thumb) %>
+                    </p>
+                </div>
+            </div>
             <div class="col-lg-12">
                 <% if policy(@candidato).edit? %>
                     <%= link_to edit_candidato_path(@candidato), class: "btn btn-primary" do %>

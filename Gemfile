@@ -20,6 +20,8 @@ gem "pundit"
 gem 'jquery-mask-plugin'
 # Integration of RubyMoney - Money with Rails
 gem 'money-rails', '~>1.12'
+# Easy file attachment management for ActiveRecord
+gem 'paperclip'
 
 source 'https://rails-assets.org' do
   # NotifyJS
