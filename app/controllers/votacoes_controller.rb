@@ -12,7 +12,7 @@ class VotacoesController < SistemaController
     @urna = Urna.find(params[:id])
     @votacao = Votacao.new
     @votacao.urna = @urna
-    @votacao.eleicao = Eleicao.find(1)
+    @votacao.eleicao = Eleicao.find(@urna.eleicao_id)
     authorize @votacao
   end
   

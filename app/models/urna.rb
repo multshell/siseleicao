@@ -2,7 +2,7 @@ class Urna < ActiveRecord::Base
     has_many :votacoes
     belongs_to :eleicao
     
-    validates :numero, uniqueness: true
+    validates :numero, uniqueness: { scope: :eleicao, message: "já possui essa urna registrada nessa eleicao" }
     validates_size_of :numero, maximum: 200
     validates_presence_of :secoes, message: "deve ser preenchido"
     validates_size_of :secoes, maximum: 300
