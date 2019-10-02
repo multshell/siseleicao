@@ -100,6 +100,7 @@
             </div>
             <div class="col-lg-12">
                 <% if @urna.finalizada %>
+                    
                 <% else %>
                     <% if policy(@urna).edit? %>
                         <%= link_to edit_apuracao_urna_path(@urna), class: "btn btn-success" do %>
@@ -123,6 +124,9 @@
                         <%= link_to '#', disabled: 'disabled', class: "btn btn-primary" do %>
                             Finalizar Apuração da Urna
                         <% end %>
+                    <% end %>
+                    <%= link_to votacao_urna_path(@urna.id), class: "btn btn-success" do %>
+                        Boletim da Urna
                     <% end %>
                 <% end %>
             </div>

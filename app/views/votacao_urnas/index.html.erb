@@ -1,0 +1,53 @@
+<h1 class="page-header">Apuração por Urnas</h1>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Listando Urnas
+        </div>
+        <!-- /.panel-heading -->
+        <div class="panel-body">
+            <div>
+                <table id="urnas" class="table table-striped table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Numero</th>
+                            <th>Apuração</th>
+                            <th>Local de Votação</th>
+                            <th>Localidade</th>
+                            <th>Eleição</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% @urnas.each do |urna| %>
+                        <% if urna.finalizada %>
+                            <tr>
+                                <td><%= urna.numero %></td>
+                                <td class="text-center">
+                                    <% if urna.finalizada %>
+                                        <div class="alert-success">Apurada</div>
+                                    <% else %>
+                                        <div class="alert-info">Não Apurada</div>
+                                    <% end %>
+                                </td>
+                                <td><%= urna.escola %></td>
+                                <td><%= urna.localidade %></td>
+                                <td><%= urna.eleicao.descricao %></td>
+                                <td width="50">
+                                    <div class="pull-right">
+                                        <%= link_to votacao_urna_path(urna), class: "btn btn-primary btn-xs" do %>
+                                            <i class="fa fa-edit"></i>
+                                        <% end %>
+                                    </div>
+                                </td>
+                            </tr>
+                        <% end %>
+                        <% end %>
+                    </tbody>
+                </table>
+                
+            </div>
+            <!-- /.table-responsive -->
+        </div>
+            <!-- /.panel-body -->
+    </div>    

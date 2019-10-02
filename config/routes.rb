@@ -20,6 +20,9 @@ Rails.application.routes.draw do
   resources :contratos_finalizados, only: [:index]
   resources :tipo_aditivos, except: [:show]
   resources :aditivos
+  resources :votacao_urnas, only: [:index, :show]
+  resources :votacao_candidatos, only: [:index, :show]
+  resources :votacao_eleicoes, only: [:index, :show]
   
   resources :eleicoes
   resources :candidatos

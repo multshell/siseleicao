@@ -1,0 +1,43 @@
+<h1 class="page-header">Apuração por Candidato</h1>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Listando Candidatos
+        </div>
+        <!-- /.panel-heading -->
+        <div class="panel-body">
+            <div>
+                <table id="votacaocandidatos" class="table table-striped table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Foto</th>
+                            <th>Numero</th>
+                            <th>Nome de Campanha</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% @candidatos.each do |candidato| %>
+                            <% if candidato.numero != "98" and candidato.numero != "99" %>
+                                <tr>
+                                    <td><%= image_tag candidato.foto.url(:thumb) %></td>
+                                    <td><%= candidato.numero %></td>
+                                    <td><%= candidato.nome_campanha %></td>
+                                    <td width="50">
+                                    <div class="pull-right">
+                                        <%= link_to votacao_candidato_path(candidato), class: "btn btn-primary btn-xs" do %>
+                                            <i class="fa fa-edit"></i>
+                                        <% end %>
+                                    </div>
+                                </td>
+                                </tr>
+                            <% end %>
+                        <% end %>
+                    </tbody>
+                </table>
+                
+            </div>
+            <!-- /.table-responsive -->
+        </div>
+            <!-- /.panel-body -->
+    </div>    

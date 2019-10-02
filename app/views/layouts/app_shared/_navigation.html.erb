@@ -82,6 +82,21 @@
                     <% end %>
                 </li>
                 <li>
+                    <%= link_to votacao_urnas_path do %>
+                        <i class="fa fa-institution fa-fw"></i> Votação por urna
+                    <% end %>
+                </li>
+                <li>
+                    <%= link_to votacao_candidatos_path do %>
+                        <i class="fa fa-institution fa-fw"></i> Votação por candidato
+                    <% end %>
+                </li>
+                <li>
+                    <%= link_to votacao_eleicoes_path do %>
+                        <i class="fa fa-institution fa-fw"></i> Votação por eleição
+                    <% end %>
+                </li>
+                <li>
                     <% if current_user.role == 'completo' %>
                         <%= link_to users_path do %>
                         <i class="fa fa-users fa-fw"></i> Usuários
