@@ -94,7 +94,7 @@ class VotacoesController < SistemaController
     def set_options_for_select
       @eleicao_options_for_select = Eleicao.all
       @urna_options_for_select = Urna.all
-      @candidato_options_for_select = Candidato.all
+      @candidato_options_for_select = Candidato.all.order("numero asc")
     end
     # Use callbacks to share common setup or constraints between actions.
     def set_votacao

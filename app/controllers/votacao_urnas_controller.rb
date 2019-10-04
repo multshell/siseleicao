@@ -9,7 +9,8 @@ class VotacaoUrnasController < ApplicationController
   end
   
   def show
-    @votacoes = Votacao.joins(:urna, :candidato).where('urna_id = ?', @urna.id).order("votos desc")
+    #@votacoes = Votacao.joins(:urna, :candidato).where('urna_id = ?', @urna.id).order("votos desc")
+    @votacoes = Votacao.joins(:urna, :candidato).where('urna_id = ?', @urna.id).order("candidatos.numero asc")
     @apurados = @votacoes.size
     @votosapurados = @votacoes.sum(:votos)
     @faltosos = @urna.eleitores - @votosapurados

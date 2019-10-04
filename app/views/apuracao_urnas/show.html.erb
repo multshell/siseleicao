@@ -111,23 +111,23 @@
                             Registrar Total de Votos da Urna
                         <% end %>
                     <% end %>
-                    
-                    <%= link_to apuracao_urnas_path, class: "btn btn-default" do %>
-                        Voltar
-                    <% end %>
-                    
-                    <% if @urna.eleicao.candidatos.size == @apurados and @urna.total_votacao == @votosapurados %>
-                        <%= link_to finaliza_path(@urna.id), class: "btn btn-success" do %>
-                            Finalizar Apuração da Urna
-                        <% end %>
-                    <% else %>
-                        <%= link_to '#', disabled: 'disabled', class: "btn btn-primary" do %>
-                            Finalizar Apuração da Urna
+                    <% if policy(@urna).destroy? %>
+                        <% if @urna.eleicao.candidatos.size == @apurados and @urna.total_votacao == @votosapurados %>
+                            <%= link_to finaliza_path(@urna.id), class: "btn btn-success" do %>
+                                Finalizar Apuração da Urna
+                            <% end %>
+                        <% else %>
+                            <%= link_to '#', disabled: 'disabled', class: "btn btn-primary" do %>
+                                Finalizar Apuração da Urna
+                            <% end %>
                         <% end %>
                     <% end %>
-                    <%= link_to votacao_urna_path(@urna.id), class: "btn btn-success" do %>
+                <% end %>
+                <%= link_to votacao_urna_path(@urna.id), class: "btn btn-success" do %>
                         Boletim da Urna
-                    <% end %>
+                <% end %>
+                <%= link_to apuracao_urnas_path, class: "btn btn-default" do %>
+                        Voltar
                 <% end %>
             </div>
             <div class="col-lg-12">
