@@ -9,6 +9,7 @@ class ApuracaoUrnasController < SistemaController
   end
   
   def show
+    #@votacoes = Votacao.includes(:candidato).where('urna_id = ?', @urna.id).order("candidatos.numero asc")
     @votacoes = Votacao.where('urna_id = ?', @urna.id)
     @apurados = @votacoes.size
     @votosapurados = @votacoes.sum(:votos)

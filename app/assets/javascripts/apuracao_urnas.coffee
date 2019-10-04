@@ -4,5 +4,6 @@
 jQuery ->
     $('#apuracao').dataTable({
         autoWidth: true,
+        "order": [ 1, 'asc' ],
         "lengthMenu": [ 10, 10, 25, 50, 75, 100 ]
     });
