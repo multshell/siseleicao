@@ -31,7 +31,7 @@
                             <td><%= user.role_i18n %></td>
                             <td width="50">
                                 <div class="pull-right">
-                                    <% if (user.role != 'completo') && policy(@users).edit? %>
+                                    <% if policy(@users).edit? %>
                                         <%= link_to edit_user_path(user), class: "btn btn-primary btn-xs" do %>
                                             <i class="fa fa-edit"></i>
                                         <% end %>
