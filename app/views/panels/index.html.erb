@@ -11,8 +11,25 @@
             <!-- /.navbar-top-links -->
         </nav>
 <br>
+
 <div class="col-lg-2">
-    
+    <row>
+    Ultima Atualização <%= @hora %>
+    <table>
+        <td width="300">
+            <div class="panel panel-green">
+                
+                <%= link_to panels_index_path do %>
+                    <div class="panel-footer">
+                        <span class="pull-left">Atualizar</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                <% end %>
+            </div>
+        </td>
+    </table>
+    </row>
 </div>
 
 <div class="col-lg-5">

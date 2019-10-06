@@ -23,6 +23,7 @@ class PanelsController < ApplicationController
     @perbrancos = (@votosbrancos.to_f * 100)/@apurados.to_f
     @pernulos = (@votosnulos.to_f * 100)/@apurados.to_f
     #@votosvalidos = 
+    @hora = Time.current
     
     #@resultados = Candidato.join(:votacoes)
     #@resultados = Candidato.includes(:votacoes).map { |candidato| resultados_candidatos.new(candidato.numero,  candidato.nome_campanha, candidato.votacoes.sum(:votos)) }
