@@ -15,7 +15,7 @@ class PanelsController < ApplicationController
     @pereleitoresnaoapurados = (@naoapurados.to_f * 100)/@totaleleitores.to_f
     @pereleitoresapurados = (@apurados.to_f * 100)/@totaleleitores.to_f
     @abstencoes = @totaleleitores - @apurados
-    @perabstencoes = (@abestencoes.to_f * 100)/@totaleleitores.to_f
+    @perabstencoes = (@abstencoes.to_f * 100)/@totaleleitores.to_f
     @votosbrancos = @votacoesfinalizadas.where(candidatos: { numero: '98'}).sum(:votos)
     @votosnulos = @votacoesfinalizadas.where(candidatos: { numero: '99'}).sum(:votos)
     @validos = @apurados - @votosbrancos - @votosnulos
